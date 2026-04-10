@@ -1,0 +1,21 @@
+include:
+  - path: docker-compose.yml
+
+services:
+  api:
+    build:
+      context: .
+      target: development
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://zenvix:zenvix@postgres:5432/zenvix
+      CHOKIDAR_USEPOLLING: 'true'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
