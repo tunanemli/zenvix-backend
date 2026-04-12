@@ -4,6 +4,7 @@
   "typescript.preferences.useAliasesForRenames": true,
   "javascript.preferences.useAliasesForRenames": true,
 
+  "editor.rulers": [120],
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[typescript]": {
@@ -17,5 +18,9 @@
   },
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "cSpell.words": [
+    "mikro",
+    "sclable"
+  ]
 }
