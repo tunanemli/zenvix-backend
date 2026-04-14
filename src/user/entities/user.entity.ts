@@ -6,19 +6,14 @@ import { ApplicationUserContract } from '@sclable/nestjs-auth';
 export class User implements ApplicationUserContract {
   @PrimaryKey('uuid')
   id!: string;
-
   @Property()
   name!: string;
-
   @Property()
   surname!: string;
-
   @Property()
   email!: string;
-
   @Property()
   password!: string;
-
   @Property({ type: 'date', defaultRaw: 'timestamp with time zone' })
   createdAt!: Date;
   @Property({ type: 'date', defaultRaw: 'timestamp with time zone' })

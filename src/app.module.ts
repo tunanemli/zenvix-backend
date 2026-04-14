@@ -2,9 +2,9 @@ import { ReflectMetadataProvider } from '@mikro-orm/decorators/legacy';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { PostgreSqlDriver } from '@mikro-orm/postgresql';
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
-import { AuthConfig, JwtGuard, LocalAuthModule, UserService } from '@sclable/nestjs-auth';
+import { JwtGuard } from '@sclable/nestjs-auth';
 import { AppController } from '@/app.controller';
 import { AppService } from '@/app.service';
 import authConfig from '@/config/auth.config';
@@ -28,14 +28,6 @@ const defaultDatabaseUrl = 'postgresql://zenvix:zenvix@localhost:5432/zenvix';
       },
     }),
     NestjsAuthUserModule,
-    LocalAuthModule.forRootAsync({
-      imports: [NestjsAuthUserModule],
-      inject: [ConfigService, UserService],
-      useFactory: (configService: ConfigService, userService: UserService) => ({
-        config: configService.getOrThrow<AuthConfig>('auth'),
-        userService,
-      }),
-    }),
     MikroOrmModule.forRoot({
       driver: PostgreSqlDriver,
       clientUrl: process.env.DATABASE_URL ?? defaultDatabaseUrl,
